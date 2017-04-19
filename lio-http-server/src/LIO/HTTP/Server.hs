@@ -116,7 +116,10 @@ instance WebMonad DC where
                    Wai.setServerName "lio-http-server" $ Wai.defaultSettings
     in Wai.runSettings settings $ toWaiApplication app
 
-instance Show Request DC where
+-- test :: Request DC
+-- test = RequestTCB Wai.defaultRequest
+
+instance Show (Request DC) where
   show (RequestTCB request) = show request
 
 -- | Type alias for DC-labeled applications
