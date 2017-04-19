@@ -78,6 +78,17 @@ data Response = Response {
  , rspBody    :: Lazy.ByteString -- ^ HTTP response body
  }
 
+
+-- header :: Header
+-- header  (hAccept, "12")
+-- test :: Response
+-- test  Response status200 (header:[]) "hello"
+
+instance Show Response where
+
+  show (Response status headers body) = 
+    show status ++ " " ++ show headers ++ " " ++ show body
+
 -- | An application is a function that takes an HTTP request and produces an
 -- HTTP response, potentially performing side-effects.
 type Application m = Request m -> m Response
@@ -104,6 +115,9 @@ instance WebMonad DC where
     let settings = Wai.setHost hostPref $ Wai.setPort port $ 
                    Wai.setServerName "lio-http-server" $ Wai.defaultSettings
     in Wai.runSettings settings $ toWaiApplication app
+
+instance Show Request DC where
+  show (RequestTCB request) = show request
 
 -- | Type alias for DC-labeled applications
 type DCApplication = Application DC

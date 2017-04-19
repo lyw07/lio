@@ -27,8 +27,7 @@ library
   default-language:    Haskell2010
   GHC-options: -Wall -fno-warn-orphans
 
-extra-source-files
-  examples/HellowWorld.hs
+
 
 source-repository head
   type:     git
